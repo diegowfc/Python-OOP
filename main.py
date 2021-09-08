@@ -4,7 +4,7 @@ print("*******************")
 print("Bem vindo!")
 print("*******************")
 
-massa = input('\nDigite a massa do corpo celeste: ');
-corpo_celeste1 = Corpos(massa, 27)
+corpo_celeste1 = Corpos(40, 27)
+corpo_celeste2 = Corpos(20, 27);
 
-print("Massa do corpo 1:", corpo_celeste1.massa)
+Corpos.media(corpo_celeste1, corpo_celeste2)
