@@ -6,6 +6,16 @@ class Corpos:
       self.x = x
       self.y = y
       self.z = z
+    lista_corpos = []
+
+    def adiciona_corpos(self):
+      Corpos.lista_corpos.append(self)
+
+    @staticmethod
+    def ordena_lista(atributo):
+      lista_ordenada = sorted(Corpos.lista_corpos, key=lambda x: x.massa, reverse=True)
+      for corpo in lista_ordenada:
+        print (f"\n{corpo.__dict__}")
 
 class Planeta(Corpos):
   def __init__(self, nome, massa, x, y, z ):
