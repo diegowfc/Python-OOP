@@ -40,4 +40,7 @@ while resposta:
           corpo_asteroide = Asteroide(nome, massa, x, y, z)
           Corpos.adiciona_corpos(corpo_asteroide)
     if resposta == "6":
-      Corpos.ordena_lista('massa')
+      if (len(Corpos.lista_corpos) != 0):
+        Corpos.ordena_lista('massa')
+      else:
+        Corpos.mostra_aviso()
