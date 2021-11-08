@@ -13,7 +13,7 @@ class Corpos:
 
     @staticmethod
     def ordena_lista(atributo):
-      lista_ordenada = sorted(Corpos.lista_corpos, key=lambda x: x.massa, reverse=True)
+      lista_ordenada = sorted(Corpos.lista_corpos, key=lambda x: x.__dict__[atributo], reverse=True)
       for corpo in lista_ordenada:
         print (f"\n{corpo.__dict__}")
     
