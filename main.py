@@ -1,10 +1,8 @@
-from classes import Planeta, Estrela, Lua, Asteroide
+from classes import Corpos, Planeta, Estrela, Lua, Asteroide
 
 print("*******************")
 print("Bem vindo!")
 print("*******************")
-
-lista_corpos = []
 
 resposta = True
 while resposta:
@@ -28,14 +26,18 @@ while resposta:
         x = float(input("->Insira a coordenada x: "))
         y = float(input("->Insira a coordenada y: "))
         z = float(input("->Insira a coordenada z: "))
+        print(f"\nCorpo com o nome {nome} inserido!\nPreencha as informações do novo corpo: ");
         if categoria == "1":
-          lista_corpos.append(Planeta(nome, massa, x, y, z))
+          corpo_planeta = Planeta(nome, massa, x, y, z)
+          Corpos.adiciona_corpos(corpo_planeta)
         elif categoria == "2":
-          lista_corpos.append(Estrela(nome, massa, x, y, z))
+          corpo_estrela = Estrela(nome, massa, x, y, z)
+          Corpos.adiciona_corpos(corpo_estrela)
         elif categoria == "3":
-          lista_corpos.append(Lua(nome, massa, x, y, z))
+          corpo_lua = Lua(nome, massa, x, y, z)
+          Corpos.adiciona_corpos(corpo_lua)
         elif categoria == "4":
-          lista_corpos.append(Asteroide(nome, massa, x, y, z))
-
-    for corpo in lista_corpos:
-      print(corpo.__dict__)
+          corpo_asteroide = Asteroide(nome, massa, x, y, z)
+          Corpos.adiciona_corpos(corpo_asteroide)
+    if resposta == "6":
+      Corpos.ordena_lista('massa')
