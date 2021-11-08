@@ -16,6 +16,10 @@ class Corpos:
       lista_ordenada = sorted(Corpos.lista_corpos, key=lambda x: x.massa, reverse=True)
       for corpo in lista_ordenada:
         print (f"\n{corpo.__dict__}")
+    
+    @staticmethod
+    def mostra_aviso():
+      print("\nAtenção!\n" "\nInsira ao menos um corpo!\n")
 
 class Planeta(Corpos):
   def __init__(self, nome, massa, x, y, z ):
