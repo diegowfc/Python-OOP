@@ -7,9 +7,10 @@ class Corpos:
         self.y = y
         self.z = z
     lista_corpos = []
-
-    def adiciona_corpos(self):
-        Corpos.lista_corpos.append(self)
+    
+    @staticmethod
+    def adiciona_corpos(objeto):
+        Corpos.lista_corpos.append(objeto)
 
     @staticmethod
     def ordena_lista(lista, atributo):
