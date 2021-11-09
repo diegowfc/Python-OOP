@@ -14,9 +14,10 @@ class Corpos:
         self.x = float(input("->Insira a coordenada x: "))
         self.y = float(input("->Insira a coordenada y: "))
         self.z = float(input("->Insira a coordenada z: "))
-
-    def adiciona_corpos(self):
-        Corpos.lista_corpos.append(self)
+    
+    @staticmethod
+    def adiciona_corpos(objeto):
+        Corpos.lista_corpos.append(objeto)
     
     def get_nome(self):
         return self.nome
