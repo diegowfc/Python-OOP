@@ -56,6 +56,8 @@ class Corpos:
             f" X: '{corpo.x}', Y: '{corpo.y}', Z: '{corpo.z}'")
         return
 
+    #Calculos
+
     @staticmethod
     def calcula_media(lista, atributo):
         soma = 0
@@ -71,6 +73,11 @@ class Corpos:
             desvio += (((corpo.__dict__[atributo] - media)**2))
         desvio = (desvio / 3)**0.5
         return desvio
+
+    @staticmethod
+    def calcula_distancia_media(x, y, atributo1, atributo2, atributo3):
+        dm = ((y.__dict__[atributo1] - x.__dict__[atributo1])**2 + (y.__dict__[atributo2] - x.__dict__[atributo2])**2 + (y.__dict__[atributo3] - x.__dict__[atributo3])**2)**0.5
+        return dm 
 
 
 class Planeta(Corpos):
