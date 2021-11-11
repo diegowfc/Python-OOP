@@ -5,11 +5,11 @@ class Menu(Corpos):
         self.opcoes = {
             "1": self.insere_corpos,
             "2": self.exibe_media,
-            "3": self.exibe_desvio,
-            #"4": self.exibe_distancia,
-            #"5": self.exibe_forca
+            "3": self.exibe_desvio_padrao,
+            "4": self.exibe_distancia_media,
+            #"5": self.exibe_forca_gravitacional
             "6": self.exibe_lista
-            #"7": self.exibe_movimento
+            #"7": self.exibe_mudanca_coordenada
             #"8": self.sair
             }
             
@@ -53,6 +53,8 @@ class Menu(Corpos):
             else:
                 print("\nAtenção!\nEscolha uma opção válida!")
     
+    #exibe calculos 
+
     @staticmethod
     def exibe_media():
       if(len(Corpos.lista_corpos) != 0):
@@ -68,9 +70,22 @@ class Menu(Corpos):
             Menu.mostra_aviso()
 
     @staticmethod
-    def exibe_desvio():
+    def exibe_desvio_padrao():
         if(len(Corpos.lista_corpos) != 0):
             media = Corpos.calcula_media(Corpos.lista_corpos, '_massa')
             print("\nO desvio padrão das massas é", Corpos.calcula_desvio(media, Corpos.lista_corpos, '_massa'))
+        else:
+            Menu.mostra_aviso()
+
+    @staticmethod
+    def exibe_distancia_media():
+        distancia = []
+        if(len(Corpos.lista_corpos) != 0):
+            for idx, x in enumerate(Corpos.lista_corpos):
+                for idy, y in enumerate(Corpos.lista_corpos[idx+1:], start=idx+1):
+                    distancia.append(Corpos.calcula_distancia_media(x, y, '_x', '_y', '_z'))
+                    print(f"\nA distância do corpo {x.nome} até o corpo {y.nome}" 
+                    f" é de {distancia[-1]}")
+            print(f'\nDistância média: {sum(distancia)/len(distancia)}')
         else:
             Menu.mostra_aviso()
