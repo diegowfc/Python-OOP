@@ -1,6 +1,5 @@
 from corpos import Corpos, Planeta, Estrela, Lua, Asteroide
 
-
 class Menu(Corpos):
     def __init__(self):
         self.opcoes = {
@@ -8,11 +7,12 @@ class Menu(Corpos):
             "2": self.exibe_media,
             "3": self.exibe_desvio_padrao,
             "4": self.exibe_distancia_media,
-            #"5": self.exibe_forca_gravitacional
-            "6": self.exibe_lista
-            #"7": self.exibe_mudanca_coordenada
-            #"8": self.sair
+            #"5": self.exibe_forca_gravitacional,
+            "6": self.exibe_lista,
+            #"7": self.exibe_mudanca_coordenada,
+            "8": self.sair
         }
+    resposta = True
 
     def mostra_menu(self):
         print("\n-----------------------------------------"
@@ -27,7 +27,7 @@ class Menu(Corpos):
               "-----------------------------------------")
 
     def executa_programa(self):
-        while True:
+        while self.resposta:
             self.mostra_menu()
             escolha = input("->Escolha uma opção: ")
             acao = self.opcoes.get(escolha)
@@ -43,17 +43,17 @@ class Menu(Corpos):
     @staticmethod
     def insere_corpos():
         categorias = {
-            '1': Planeta('', 0.0, 0.0, 0.0, 0.0),
-            '2': Estrela('', 0.0, 0.0, 0.0, 0.0),
-            '3': Lua('', 0.0, 0.0, 0.0, 0.0),
-            '4': Asteroide('', 0.0, 0.0, 0.0, 0.0)
+            '1': Planeta,
+            '2': Estrela,
+            '3': Lua,
+            '4': Asteroide
         }
         n = int(input("->Digite a quantidade de corpos há ser inserido: "))
         for i in range(0, n):
             categoria = input("\n->Categoria do corpo:\n1 para Planeta\n2 para Estrela""\n3 para Lua\n4 para Asteroide"
                 "\nEscolha uma opção: ")
             if (categoria == '1' or categoria == '2' or categoria == '3'or categoria == '4'):
-                corpo_celeste = categorias[categoria]
+                corpo_celeste = categorias[categoria]('', 0.0, 0.0, 0.0, 0.0)
                 corpo_celeste.insere_cadastro()
             else:
                 print("\nAtenção!\nEscolha uma opção válida!")
@@ -99,3 +99,12 @@ class Menu(Corpos):
             Corpos.ordena_lista(Corpos.lista_corpos, '_massa')
         else:
             Menu.mostra_aviso()
+
+    @staticmethod
+    def exibe_mudanca_coordenada():
+        pass
+
+    def sair(self):
+      print("\nPrograma finalizado!\nObrigado por usar!")
+      self.resposta = False
+      
