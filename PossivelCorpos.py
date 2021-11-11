@@ -15,9 +15,10 @@ class Corpos:
         self.y = float(input("->Insira a coordenada y: "))
         self.z = float(input("->Insira a coordenada z: "))
     
-    @staticmethod
-    def adiciona_corpos(objeto):
-        Corpos.lista_corpos.append(objeto)
+    def insere_cadastro(self):
+      self.cadastro('nome','massa','x','y','z')
+      Corpos.lista_corpos.append(self)
+      self.exibe_cadastro()
     
     def get_nome(self):
         return self.nome
@@ -27,11 +28,7 @@ class Corpos:
 
     def exibe_cadastro(self):
       return print(f"\nCorpo com o nome {self.get_nome()} e categoria {self.get_categoria()} inserido!"
-                    "\n\nPreencha as informações do novo corpo: ")
-
-    @staticmethod
-    def mostra_aviso():
-        print("\nAtenção!\n" "\nInsira ao menos um corpo!\n")
+      "\n\nPreencha as informações do novo corpo: ")
 
     @staticmethod
     def ordena_lista(lista, atributo):
@@ -48,7 +45,7 @@ class Corpos:
         resultado_media = soma / len(lista)
         return resultado_media
 
-        
+
 class Planeta(Corpos):
     def __init__(self, nome, massa, x, y, z):
         super().__init__(nome, massa, x, y, z)
