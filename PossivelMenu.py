@@ -9,7 +9,7 @@ class Menu(Corpos):
             "4": self.exibe_distancia_media,
             #"5": self.exibe_forca_gravitacional,
             "6": self.exibe_lista,
-            #"7": self.exibe_mudanca_coordenada,
+            "7": self.exibe_mudanca_coordenada,
             "8": self.sair
         }
     resposta = True
@@ -102,9 +102,11 @@ class Menu(Corpos):
 
     @staticmethod
     def exibe_mudanca_coordenada():
-        pass
+        if (len(Corpos.lista_corpos) != 0):
+            Menu.altera_coordenada(Corpos.lista_corpos, '_nome')
+        else:
+            Menu.mostra_aviso()
 
     def sair(self):
       print("\nPrograma finalizado!\nObrigado por usar!")
       self.resposta = False
-      
