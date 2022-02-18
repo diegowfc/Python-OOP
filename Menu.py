@@ -7,10 +7,11 @@ class Menu(Corpos):
             "2": self.exibe_media,
             "3": self.exibe_desvio_padrao,
             "4": self.exibe_distancia_media,
-            #"5": self.exibe_forca_gravitacional,
+            "5": self.exibe_forca_gravitacional,
             "6": self.exibe_lista,
             "7": self.exibe_mudanca_coordenada,
-            "8": self.sair
+            "8": self.exibe_simulacao,
+            "9": self.sair
         }
     resposta = True
 
@@ -20,10 +21,11 @@ class Menu(Corpos):
               "->2.Calcular média da massa dos corpos\n"
               "->3.Calcular o desvio padrão das massas\n"
               "->4.Calcular a distância média dos corpos\n"
-              "->5.Calcular força gravitacional entre os corpos\n"
+              "->5.Calcular força gravitacional resultante dos corpos\n"
               "->6.Listar corpos por massa\n"
-              "->7 Mover corpos\n"
-              "->8.Sair\n"
+              "->7.Mover corpos\n"
+              "->8.Simular translações\n"
+              "->9.Sair\n"
               "-----------------------------------------")
 
     def executa_programa(self):
@@ -40,8 +42,10 @@ class Menu(Corpos):
     def mostra_aviso():
         print("\nAtenção!\n" "\nInsira ao menos um corpo!\n")
 
-    @staticmethod
-    def insere_corpos():
+
+#EXIBE INFORMAÇÕES
+
+    def insere_corpos(self):
         categorias = {
             '1': Planeta,
             '2': Estrela,
@@ -58,26 +62,20 @@ class Menu(Corpos):
             else:
                 print("\nAtenção!\nEscolha uma opção válida!")
 
-    #exibe calculos
-
-    @staticmethod
-    def exibe_media():
+    def exibe_media(self):
         if (len(Corpos.lista_corpos) != 0):
-            print(f"\nA média das massas é {Corpos.calcula_media(Corpos.lista_corpos, '_massa')}")
+            print(f"\nA média das massas é {Corpos.calcula_media('_massa')}")
         else:
             Menu.mostra_aviso()
 
-    @staticmethod
-    def exibe_desvio_padrao():
+    def exibe_desvio_padrao(self):
         if (len(Corpos.lista_corpos) != 0):
-            media = Corpos.calcula_media(Corpos.lista_corpos, '_massa')
-            print("\nO desvio padrão das massas é",
-                  Corpos.calcula_desvio(media, Corpos.lista_corpos, '_massa'))
+            media = Corpos.calcula_media('_massa')
+            print("\nO desvio padrão das massas é",Corpos.calcula_desvio(media, '_massa'))
         else:
             Menu.mostra_aviso()
 
-    @staticmethod
-    def exibe_distancia_media():
+    def exibe_distancia_media(self):
         distancia = []
         if (len(Corpos.lista_corpos) != 0):
             for idx, x in enumerate(Corpos.lista_corpos):
@@ -89,23 +87,40 @@ class Menu(Corpos):
         else:
             Menu.mostra_aviso()
 
-    @staticmethod
-    def exibe_forca_gravitacional():
-        pass
-
-    @staticmethod
-    def exibe_lista():
+    def exibe_forca_gravitacional(self):
+        Corpos.lista_forca_resultante.clear()
         if (len(Corpos.lista_corpos) != 0):
-            Corpos.ordena_lista(Corpos.lista_corpos, '_massa')
+            for idx, x in enumerate(Corpos.lista_corpos):
+                Corpos.frx = 0
+                Corpos.fry = 0
+                Corpos.frz = 0
+                for idy, y in enumerate(Corpos.lista_corpos[idx+1:], start=idx+1):
+                    fr = Corpos.calcula_forca_resultante(x, y)
+                Corpos.lista_forca_resultante.append(fr)
+                print(f"\nA força resultante no corpo {x.nome} é de {Corpos.lista_forca_resultante[idx]}")
+                Corpos.armazena_dados(x, idx, Corpos.lista_forca_resultante)             
+        else:
+            Menu.mostra_aviso()
+            
+    def exibe_lista(self):
+        if (len(Corpos.lista_corpos) != 0):
+            Corpos.ordena_lista('_massa')
         else:
             Menu.mostra_aviso()
 
-    @staticmethod
-    def exibe_mudanca_coordenada():
+    def exibe_mudanca_coordenada(self):
         if (len(Corpos.lista_corpos) != 0):
-            Menu.altera_coordenada(Corpos.lista_corpos, '_nome')
+            Corpos.altera_coordenada('_nome')
         else:
             Menu.mostra_aviso()
+    
+    def exibe_simulacao(self):
+        if (len(Corpos.lista_forca_resultante) != 0):
+            Corpos.executa_simulacao()
+        else:
+            print(
+            "\nAntes de realizar a simulação, é necessário calcular a força gravitacional resultante!"
+            )
 
     def sair(self):
       print("\nPrograma finalizado!\nObrigado por usar!")
